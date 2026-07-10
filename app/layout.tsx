@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Nunito } from "next/font/google";
+import { Inter } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
@@ -9,19 +9,10 @@ const inter = Inter({
   display: "swap",
 });
 
-// Nunito stands in for the library's Avenir: a rounded, friendly geometric sans
-// for the Ara wordmark and headings.
-const nunito = Nunito({
-  variable: "--font-nunito",
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["600", "700", "800"],
-});
-
 export const metadata: Metadata = {
   title: "Muzium Negara Guide · Ara",
   description:
-    "Ara is a warm, grounded chat guide to Muzium Negara, the National Museum in Kuala Lumpur. Ask about the four galleries and what's inside.",
+    "A modern chat guide to Muzium Negara, the National Museum in Kuala Lumpur. Ask Ara about the four permanent galleries and what's inside.",
   applicationName: "Muzium Negara Guide",
   appleWebApp: {
     capable: true,
@@ -31,7 +22,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#FAF8F5",
+  themeColor: "#a32638",
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
@@ -43,12 +34,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${inter.variable} ${nunito.variable} h-full antialiased`}
-    >
+    <html lang="en" className={`${inter.variable} h-full antialiased`}>
       <body className="bg-background text-foreground flex min-h-full flex-col">
-        <div className="bg-background mx-auto flex min-h-dvh w-full max-w-md flex-1 flex-col">
+        {/* museum-red identity accent */}
+        <div className="bg-primary h-1 w-full shrink-0" aria-hidden />
+        <div className="bg-background mx-auto flex min-h-dvh w-full max-w-md flex-1 flex-col shadow-sm">
           {children}
         </div>
         <Toaster position="top-center" />

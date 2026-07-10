@@ -7,6 +7,7 @@ import { Send } from "lucide-react";
 import { toast } from "sonner";
 import { ChatBubble } from "@/components/chat-bubble";
 import { AraAvatar } from "@/components/ara-avatar";
+import { Logo } from "@/components/logo";
 import { QuickReplyChips } from "@/components/quick-reply-chips";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -104,17 +105,20 @@ export function MuziumChat() {
 
   return (
     <div className="flex flex-1 flex-col">
-      <div className="bg-background/95 sticky top-0 z-10 flex items-center gap-2 border-b px-4 py-3 backdrop-blur">
-        <AraAvatar size="sm" expression="happy" />
-        <span className="font-heading text-sm font-medium">{GUIDE_TITLE}</span>
-      </div>
+      <header className="bg-background/95 sticky top-0 z-10 flex items-center justify-between border-b px-4 py-3 backdrop-blur">
+        <Logo />
+        <span className="bg-accent text-accent-foreground inline-flex items-center gap-1.5 rounded-full py-1 pr-2.5 pl-1.5 text-xs font-medium">
+          <AraAvatar size="xs" expression="happy" />
+          Ara
+        </span>
+      </header>
 
       <div className="flex-1 space-y-4 px-4 py-5">
         {isEmpty && (
           <div className="space-y-3">
             <ChatBubble role="assistant" expression="happy">
-              hi! welcome to {GUIDE_TITLE} 🙂 ask me anything about what&apos;s
-              here and i&apos;ll walk you through it.
+              hi, welcome to {GUIDE_TITLE} 🙂 i&apos;m Ara, your guide. ask me
+              anything about the four galleries and what&apos;s inside.
             </ChatBubble>
             <QuickReplyChips
               options={STARTERS}
@@ -122,6 +126,10 @@ export function MuziumChat() {
               disabled={busy}
               className="pl-9"
             />
+            <p className="text-muted-foreground/80 px-1 pt-2 text-[11px] leading-relaxed">
+              Ara answers from Muzium Negara&apos;s permanent-gallery guide. An
+              independent companion, not affiliated with the official museum.
+            </p>
           </div>
         )}
 

@@ -5,13 +5,10 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
-  Ara "Blend" design system.
-  - Calm core (sage-teal/peach/warm-sand) drives the semantic shadcn tokens below.
-  - Companion pastels drive Ara's expressions, avatar accents, and itinerary category chips.
-  DESIGN GAP: the design-library printed hex codes are inconsistent with their colour names
-  (AI-image artifacts), companion.* hexes are interpreted from the swatches, pending designer confirmation.
-  DESIGN GAP: the library lists "Avenir" (paid, not freely web-licensable), substituted Inter (body) +
-  Fraunces (display), pending a design decision.
+  Muzium Negara guide, "Modern Museum" design system.
+  - Clean neutral canvas, deep museum red as the single strong accent, gold as a
+    secondary highlight. Crisp modern sans (Inter) for headings and body.
+  - Companion pastels remain only for Ara's avatar expressions (her friendly face).
 */
 
 @theme inline {
@@ -20,7 +17,7 @@
 
   --font-sans: var(--font-inter);
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  --font-heading: var(--font-nunito);
+  --font-heading: var(--font-inter);
 
   /* Brand accents (kept distinct from shadcn's subtle --accent hover token) */
   --color-peach: var(--peach);
@@ -76,33 +73,33 @@
 }
 
 :root {
-  /* Calm core */
-  --background: #faf8f5; /* warm sand */
-  --foreground: #2b2b2b; /* ink */
+  /* Modern museum core */
+  --background: #f5f4f2; /* warm neutral canvas */
+  --foreground: #1a1a1a; /* ink */
   --card: #ffffff;
-  --card-foreground: #2b2b2b;
+  --card-foreground: #1a1a1a;
   --popover: #ffffff;
-  --popover-foreground: #2b2b2b;
-  --primary: #3e8e7e; /* sage-teal */
+  --popover-foreground: #1a1a1a;
+  --primary: #a32638; /* deep museum red */
   --primary-foreground: #ffffff;
-  --secondary: #f0ebe4; /* soft sand surface */
-  --secondary-foreground: #2b2b2b;
-  --muted: #f0ebe4;
-  --muted-foreground: #8a8780;
-  --accent: #fbede7; /* gentle peach tint for subtle hovers */
-  --accent-foreground: #2b2b2b;
-  --destructive: #c4615a; /* muted terracotta, genuine destructive only */
-  --border: #e7e1d8;
-  --input: #e7e1d8;
-  --ring: #3e8e7e;
+  --secondary: #ecebe8; /* soft neutral surface */
+  --secondary-foreground: #1a1a1a;
+  --muted: #ecebe8;
+  --muted-foreground: #6f6b66;
+  --accent: #f6e9eb; /* light red tint for subtle hovers */
+  --accent-foreground: #a32638;
+  --destructive: #b3261e;
+  --border: #e3e0db;
+  --input: #e3e0db;
+  --ring: #a32638;
 
   /* Brand accents */
-  --peach: #f2a488; /* soft peach CTA accent */
-  --peach-foreground: #2b2b2b;
-  --warning: #d9a441; /* amber, validation, never red */
-  --warning-foreground: #2b2b2b;
+  --peach: #c8a24b; /* museum gold, secondary highlight */
+  --peach-foreground: #1a1a1a;
+  --warning: #c8a24b; /* gold, validation, never red */
+  --warning-foreground: #1a1a1a;
 
-  /* Companion pastels (interpreted from the library swatches) */
+  /* Companion pastels (Ara's avatar expressions only) */
   --companion-mint: #bfe3ce;
   --companion-blush: #f7c5ce;
   --companion-sky: #bfd9f2;
@@ -110,55 +107,55 @@
   --companion-sand: #f0e2c8;
   --companion-orange: #e8895a;
 
-  --chart-1: #3e8e7e;
-  --chart-2: #f2a488;
-  --chart-3: #bfd9f2;
-  --chart-4: #dac5ec;
-  --chart-5: #d9a441;
+  --chart-1: #a32638;
+  --chart-2: #c8a24b;
+  --chart-3: #6f6b66;
+  --chart-4: #d98379;
+  --chart-5: #1a1a1a;
 
-  --radius: 1rem; /* friendly = safe; lg≈16px, xl≈20px */
+  --radius: 0.75rem; /* modern = crisp; lg≈12px, xl≈15px */
 
   --sidebar: #ffffff;
-  --sidebar-foreground: #2b2b2b;
-  --sidebar-primary: #3e8e7e;
+  --sidebar-foreground: #1a1a1a;
+  --sidebar-primary: #a32638;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #f0ebe4;
-  --sidebar-accent-foreground: #2b2b2b;
-  --sidebar-border: #e7e1d8;
-  --sidebar-ring: #3e8e7e;
+  --sidebar-accent: #ecebe8;
+  --sidebar-accent-foreground: #1a1a1a;
+  --sidebar-border: #e3e0db;
+  --sidebar-ring: #a32638;
 }
 
 .dark {
-  --background: #20211e;
-  --foreground: #f4f1ea;
-  --card: #2a2b27;
-  --card-foreground: #f4f1ea;
-  --popover: #2a2b27;
-  --popover-foreground: #f4f1ea;
-  --primary: #5fb3a1;
-  --primary-foreground: #16241f;
-  --secondary: #34352f;
-  --secondary-foreground: #f4f1ea;
-  --muted: #34352f;
-  --muted-foreground: #b4b0a6;
-  --accent: #3a352f;
-  --accent-foreground: #f4f1ea;
-  --destructive: #d98379;
+  --background: #171614;
+  --foreground: #f3f1ec;
+  --card: #201f1d;
+  --card-foreground: #f3f1ec;
+  --popover: #201f1d;
+  --popover-foreground: #f3f1ec;
+  --primary: #d24b5e;
+  --primary-foreground: #1a1010;
+  --secondary: #2a2926;
+  --secondary-foreground: #f3f1ec;
+  --muted: #2a2926;
+  --muted-foreground: #b0aca4;
+  --accent: #33211f;
+  --accent-foreground: #f3f1ec;
+  --destructive: #e0685f;
   --border: #ffffff1a;
   --input: #ffffff26;
-  --ring: #5fb3a1;
-  --peach: #f2a488;
-  --peach-foreground: #20211e;
-  --warning: #e0b35e;
-  --warning-foreground: #20211e;
-  --sidebar: #2a2b27;
-  --sidebar-foreground: #f4f1ea;
-  --sidebar-primary: #5fb3a1;
-  --sidebar-primary-foreground: #16241f;
-  --sidebar-accent: #34352f;
-  --sidebar-accent-foreground: #f4f1ea;
+  --ring: #d24b5e;
+  --peach: #d8b45f;
+  --peach-foreground: #171614;
+  --warning: #d8b45f;
+  --warning-foreground: #171614;
+  --sidebar: #201f1d;
+  --sidebar-foreground: #f3f1ec;
+  --sidebar-primary: #d24b5e;
+  --sidebar-primary-foreground: #1a1010;
+  --sidebar-accent: #2a2926;
+  --sidebar-accent-foreground: #f3f1ec;
   --sidebar-border: #ffffff1a;
-  --sidebar-ring: #5fb3a1;
+  --sidebar-ring: #d24b5e;
 }
 
 @layer base {

@@ -2,7 +2,13 @@
 
 A standalone chat guide to **Muzium Negara**, the National Museum in Kuala Lumpur. Chat with **Ara**, a warm, friendly museum guide who answers questions about the four permanent galleries (*Galeri A: Sejarah Awal*, *Galeri B: Kerajaan-Kerajaan Melayu*, *Galeri C: Era Kolonial*, *Galeri D: Malaysia Kini*) and the artifacts inside.
 
-This was extracted from the Ara Travel app into its own self-contained Next.js project.
+This was extracted from the Ara Travel app into its own self-contained Next.js project, with a clean "modern museum" redesign (deep museum red on a neutral canvas).
+
+## Deploy
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fasyazwan8%2Fmuzium-negara&env=OLLAMA_BASE_URL,OLLAMA_API_KEY,OLLAMA_MODEL&envDescription=Ollama-compatible%20model%20credentials%20for%20Ara&project-name=muzium-negara&repository-name=muzium-negara)
+
+Click the button, then set the three environment variables below when prompted. Vercel auto-detects Next.js (see `vercel.json`), so no extra build config is needed.
 
 ## How it works
 
@@ -46,6 +52,13 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) and start chatting.
+
+## Using the official logo
+
+The header currently shows a clean placeholder wordmark (`components/logo.tsx`) so the app deploys immediately. To use the real Muzium Negara logo:
+
+1. Drop the logo file at `public/logo.png` (or `.svg`).
+2. In `components/logo.tsx`, set `USE_IMAGE_LOGO = true` (and adjust `LOGO_SRC` if needed).
 
 ## Project layout
 
