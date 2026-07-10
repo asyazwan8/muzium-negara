@@ -1,0 +1,191 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+  Ara "Blend" design system.
+  - Calm core (sage-teal/peach/warm-sand) drives the semantic shadcn tokens below.
+  - Companion pastels drive Ara's expressions, avatar accents, and itinerary category chips.
+  DESIGN GAP: the design-library printed hex codes are inconsistent with their colour names
+  (AI-image artifacts), companion.* hexes are interpreted from the swatches, pending designer confirmation.
+  DESIGN GAP: the library lists "Avenir" (paid, not freely web-licensable), substituted Inter (body) +
+  Fraunces (display), pending a design decision.
+*/
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --font-sans: var(--font-inter);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-heading: var(--font-nunito);
+
+  /* Brand accents (kept distinct from shadcn's subtle --accent hover token) */
+  --color-peach: var(--peach);
+  --color-peach-foreground: var(--peach-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+
+  /* Companion pastels, Ara expressions, avatar rings, itinerary category chips */
+  --color-companion-mint: var(--companion-mint);
+  --color-companion-blush: var(--companion-blush);
+  --color-companion-sky: var(--companion-sky);
+  --color-companion-lilac: var(--companion-lilac);
+  --color-companion-sand: var(--companion-sand);
+  --color-companion-orange: var(--companion-orange);
+
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.25);
+  --radius-2xl: calc(var(--radius) * 1.6);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  /* Calm core */
+  --background: #faf8f5; /* warm sand */
+  --foreground: #2b2b2b; /* ink */
+  --card: #ffffff;
+  --card-foreground: #2b2b2b;
+  --popover: #ffffff;
+  --popover-foreground: #2b2b2b;
+  --primary: #3e8e7e; /* sage-teal */
+  --primary-foreground: #ffffff;
+  --secondary: #f0ebe4; /* soft sand surface */
+  --secondary-foreground: #2b2b2b;
+  --muted: #f0ebe4;
+  --muted-foreground: #8a8780;
+  --accent: #fbede7; /* gentle peach tint for subtle hovers */
+  --accent-foreground: #2b2b2b;
+  --destructive: #c4615a; /* muted terracotta, genuine destructive only */
+  --border: #e7e1d8;
+  --input: #e7e1d8;
+  --ring: #3e8e7e;
+
+  /* Brand accents */
+  --peach: #f2a488; /* soft peach CTA accent */
+  --peach-foreground: #2b2b2b;
+  --warning: #d9a441; /* amber, validation, never red */
+  --warning-foreground: #2b2b2b;
+
+  /* Companion pastels (interpreted from the library swatches) */
+  --companion-mint: #bfe3ce;
+  --companion-blush: #f7c5ce;
+  --companion-sky: #bfd9f2;
+  --companion-lilac: #dac5ec;
+  --companion-sand: #f0e2c8;
+  --companion-orange: #e8895a;
+
+  --chart-1: #3e8e7e;
+  --chart-2: #f2a488;
+  --chart-3: #bfd9f2;
+  --chart-4: #dac5ec;
+  --chart-5: #d9a441;
+
+  --radius: 1rem; /* friendly = safe; lg≈16px, xl≈20px */
+
+  --sidebar: #ffffff;
+  --sidebar-foreground: #2b2b2b;
+  --sidebar-primary: #3e8e7e;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f0ebe4;
+  --sidebar-accent-foreground: #2b2b2b;
+  --sidebar-border: #e7e1d8;
+  --sidebar-ring: #3e8e7e;
+}
+
+.dark {
+  --background: #20211e;
+  --foreground: #f4f1ea;
+  --card: #2a2b27;
+  --card-foreground: #f4f1ea;
+  --popover: #2a2b27;
+  --popover-foreground: #f4f1ea;
+  --primary: #5fb3a1;
+  --primary-foreground: #16241f;
+  --secondary: #34352f;
+  --secondary-foreground: #f4f1ea;
+  --muted: #34352f;
+  --muted-foreground: #b4b0a6;
+  --accent: #3a352f;
+  --accent-foreground: #f4f1ea;
+  --destructive: #d98379;
+  --border: #ffffff1a;
+  --input: #ffffff26;
+  --ring: #5fb3a1;
+  --peach: #f2a488;
+  --peach-foreground: #20211e;
+  --warning: #e0b35e;
+  --warning-foreground: #20211e;
+  --sidebar: #2a2b27;
+  --sidebar-foreground: #f4f1ea;
+  --sidebar-primary: #5fb3a1;
+  --sidebar-primary-foreground: #16241f;
+  --sidebar-accent: #34352f;
+  --sidebar-accent-foreground: #f4f1ea;
+  --sidebar-border: #ffffff1a;
+  --sidebar-ring: #5fb3a1;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+  html {
+    @apply font-sans antialiased;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, .font-heading {
+    font-family: var(--font-heading);
+  }
+}
+
+/* Honour reduced-motion everywhere (calm by default) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
