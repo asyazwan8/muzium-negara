@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { AraAvatar, type AraExpression } from "./ara-avatar";
+import { KancilAvatar } from "./kancil-avatar";
 
 // Render a little markdown in Ara's messages: links [label](url) and bare URLs
 // become clickable, **bold** and *italic* render as such (italics are used for
@@ -52,42 +52,40 @@ function renderRichText(text: string): React.ReactNode {
 }
 
 /**
- * A single chat bubble. Ara's messages sit on the left with her face on a soft
- * surface with a gentle shadow; the user's messages sit on the right in
- * sage-teal with white text. Her face can carry a per-message expression.
+ * A single chat bubble. Kancil's messages sit on the left with her portrait on a
+ * soft surface with a gentle shadow; the user's messages sit on the right in
+ * museum red with white text.
  */
 export function ChatBubble({
   role,
   children,
   className,
   hideAvatar = false,
-  expression = "calm",
 }: {
   role: "user" | "assistant" | "system";
   children: React.ReactNode;
   className?: string;
   hideAvatar?: boolean;
-  expression?: AraExpression;
 }) {
-  const isAra = role !== "user";
+  const isKancil = role !== "user";
   return (
     <div
       className={cn(
         "flex w-full gap-2",
-        isAra ? "justify-start" : "justify-end",
+        isKancil ? "justify-start" : "justify-end",
         className,
       )}
     >
-      {isAra &&
+      {isKancil &&
         (hideAvatar ? (
           <div className="w-7 shrink-0" aria-hidden />
         ) : (
-          <AraAvatar size="sm" expression={expression} className="mt-1" />
+          <KancilAvatar size="sm" className="mt-1" />
         ))}
       <div
         className={cn(
           "max-w-[82%] rounded-2xl px-4 py-2.5 text-[15px] leading-relaxed whitespace-pre-wrap break-words",
-          isAra
+          isKancil
             ? "bg-card text-card-foreground rounded-tl-md shadow-sm"
             : "bg-primary text-primary-foreground rounded-tr-md",
         )}

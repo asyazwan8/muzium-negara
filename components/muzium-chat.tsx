@@ -6,12 +6,12 @@ import { DefaultChatTransport, type UIMessage } from "ai";
 import { Send } from "lucide-react";
 import { toast } from "sonner";
 import { ChatBubble } from "@/components/chat-bubble";
-import { AraAvatar } from "@/components/ara-avatar";
+import { KancilAvatar } from "@/components/kancil-avatar";
 import { Logo } from "@/components/logo";
 import { QuickReplyChips } from "@/components/quick-reply-chips";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { emotionForMessage } from "@/lib/emotion";
+import { CHARACTER_NAME } from "@/lib/persona";
 
 const GUIDE_TITLE = "Muzium Negara";
 
@@ -108,17 +108,27 @@ export function MuziumChat() {
       <header className="bg-background/95 sticky top-0 z-10 flex items-center justify-between border-b px-4 py-3 backdrop-blur">
         <Logo />
         <span className="bg-accent text-accent-foreground inline-flex items-center gap-1.5 rounded-full py-1 pr-2.5 pl-1.5 text-xs font-medium">
-          <AraAvatar size="xs" expression="happy" />
-          Ara
+          <KancilAvatar size="xs" />
+          {CHARACTER_NAME}
         </span>
       </header>
 
       <div className="flex-1 space-y-4 px-4 py-5">
         {isEmpty && (
           <div className="space-y-3">
-            <ChatBubble role="assistant" expression="happy">
-              hi, welcome to {GUIDE_TITLE} 🙂 i&apos;m Ara, your guide. ask me
-              anything about the four galleries and what&apos;s inside.
+            <div className="flex flex-col items-center gap-1 pt-2 pb-1 text-center">
+              <KancilAvatar size="xl" contain />
+              <p className="font-heading text-foreground mt-1 text-base font-semibold">
+                {CHARACTER_NAME}
+              </p>
+              <p className="text-muted-foreground text-xs">
+                Sang Kancil, your {GUIDE_TITLE} guide
+              </p>
+            </div>
+            <ChatBubble role="assistant">
+              salam, welcome to {GUIDE_TITLE} 🙂 i&apos;m {CHARACTER_NAME}, the
+              little mouse-deer. ask me anything about the four galleries and
+              what&apos;s inside, and i&apos;ll tell you the story.
             </ChatBubble>
             <QuickReplyChips
               options={STARTERS}
@@ -127,8 +137,9 @@ export function MuziumChat() {
               className="pl-9"
             />
             <p className="text-muted-foreground/80 px-1 pt-2 text-[11px] leading-relaxed">
-              Ara answers from Muzium Negara&apos;s permanent-gallery guide. An
-              independent companion, not affiliated with the official museum.
+              {CHARACTER_NAME} answers from {GUIDE_TITLE}&apos;s permanent-gallery
+              guide. An independent companion, not affiliated with the official
+              museum.
             </p>
           </div>
         )}
@@ -146,7 +157,6 @@ export function MuziumChat() {
             );
           }
 
-          const mood = emotionForMessage(text);
           const isRevealing = m.id === revealId;
           if (!isRevealing && isLast && streaming) return null;
           const bubbles = isRevealing
@@ -156,12 +166,7 @@ export function MuziumChat() {
           return (
             <div key={m.id} className="space-y-1.5">
               {bubbles.map((b, i) => (
-                <ChatBubble
-                  key={i}
-                  role="assistant"
-                  hideAvatar={i > 0}
-                  expression={mood}
-                >
+                <ChatBubble key={i} role="assistant" hideAvatar={i > 0}>
                   {b}
                 </ChatBubble>
               ))}
@@ -171,9 +176,9 @@ export function MuziumChat() {
 
         {showTyping && (
           <div className="flex items-center gap-2">
-            <AraAvatar size="sm" expression="thinking" />
+            <KancilAvatar size="sm" />
             <span className="text-muted-foreground animate-pulse text-sm">
-              Ara is typing..
+              {CHARACTER_NAME} is typing..
             </span>
           </div>
         )}
@@ -194,7 +199,9 @@ export function MuziumChat() {
             }}
             rows={1}
             disabled={busy}
-            placeholder={busy ? "Ara is typing…" : `Ask about ${GUIDE_TITLE}…`}
+            placeholder={
+              busy ? `${CHARACTER_NAME} is typing…` : `Ask about ${GUIDE_TITLE}…`
+            }
             aria-label="Ask the guide"
             className="max-h-32 min-h-11 flex-1 resize-none rounded-2xl disabled:opacity-60"
           />
