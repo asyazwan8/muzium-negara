@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
 const LOGO_SRC = "/logo.png";
@@ -33,11 +33,20 @@ function MuseumMark({ className }: { className?: string }) {
  */
 export function Logo({ className }: { className?: string }) {
   const [failed, setFailed] = useState(false);
+  const ref = useRef<HTMLImageElement>(null);
+
+  // A 404 can happen before hydration, so React's onError never fires. Re-check
+  // on mount: a loaded-but-broken image reports naturalWidth 0.
+  useEffect(() => {
+    const img = ref.current;
+    if (img && img.complete && img.naturalWidth === 0) setFailed(true);
+  }, []);
 
   if (!failed) {
     return (
       // eslint-disable-next-line @next/next/no-img-element
       <img
+        ref={ref}
         src={LOGO_SRC}
         alt="Muzium Negara"
         onError={() => setFailed(true)}
