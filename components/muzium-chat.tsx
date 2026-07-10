@@ -116,7 +116,7 @@ export function MuziumChat() {
   return (
     <div className="relative flex flex-1 flex-col overflow-hidden">
       {/* Kancil photo backdrop, softened by a scrim so chat stays readable */}
-      <div aria-hidden className="absolute inset-0 -z-10">
+      <div aria-hidden className="absolute inset-0 z-0">
         {!bgFailed && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -124,13 +124,13 @@ export function MuziumChat() {
             src="/kancil.png"
             alt=""
             onError={() => setBgFailed(true)}
-            className="h-full w-full object-cover object-center opacity-90"
+            className="h-full w-full object-cover object-center"
           />
         )}
-        <div className="from-background/85 via-background/40 to-background/90 absolute inset-0 bg-gradient-to-b" />
+        <div className="bg-background/45 dark:bg-background/70 absolute inset-0" />
       </div>
 
-      <header className="bg-background/50 flex shrink-0 items-center justify-between border-b px-3 py-3 backdrop-blur-md">
+      <header className="bg-background/50 relative z-10 flex shrink-0 items-center justify-between border-b px-3 py-3 backdrop-blur-md">
         <div className="flex items-center gap-1.5">
           <Link
             href="/"
@@ -147,7 +147,7 @@ export function MuziumChat() {
         </span>
       </header>
 
-      <div className="flex-1 space-y-4 overflow-y-auto px-4 py-5">
+      <div className="relative z-10 flex-1 space-y-4 overflow-y-auto px-4 py-5">
         {isEmpty && (
           <div className="space-y-3">
             <ChatBubble role="assistant">
@@ -211,7 +211,7 @@ export function MuziumChat() {
         <div ref={endRef} />
       </div>
 
-      <div className="bg-background/60 shrink-0 border-t px-3 py-3 backdrop-blur-md">
+      <div className="bg-background/60 relative z-10 shrink-0 border-t px-3 py-3 backdrop-blur-md">
         <div className="flex items-end gap-2">
           <Textarea
             value={input}
