@@ -16,12 +16,28 @@ export async function POST(req: Request) {
 
   if (!messages?.length) return new Response("Bad request", { status: 400 });
 
-  const result = streamText({
-    model: getModel(),
-    system: buildSystemPrompt(lang === "ms" ? "ms" : "en"),
-    messages: uiToModelMessages(messages),
-    temperature: 0.3,
-  });
+  try {
+    const result = streamText({
+      model: getModel(),
+      system: buildSystemPrompt(lang === "ms" ? "ms" : "en"),
+      messages: uiToModelMessages(messages),
+      temperature: 0.3,
+    });
 
-  return result.toUIMessageStreamResponse();
+    return result.toUIMessageStreamResponse({
+      // Forward the real reason (bad key, wrong model tag, unreachable URL) to
+      // the client toast and the Vercel function logs instead of masking it.
+      onError: (error) => {
+        console.error("[api/chat] stream error:", error);
+        return error instanceof Error ? error.message : "Chat request failed.";
+      },
+    });
+  } catch (error) {
+    console.error("[api/chat] setup error:", error);
+    const message =
+      error instanceof Error
+        ? error.message
+        : "Chat is not configured. Check the OLLAMA_* environment variables.";
+    return new Response(message, { status: 500 });
+  }
 }

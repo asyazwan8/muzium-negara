@@ -69,7 +69,12 @@ export function MuziumChat() {
       }),
     }),
     onFinish: ({ message }) => startReveal(message as UIMessage),
-    onError: () => toast.error(STRINGS[langRef.current].errorHiccup),
+    onError: (error) => {
+      console.error("[chat] error:", error);
+      toast.error(STRINGS[langRef.current].errorHiccup, {
+        description: error instanceof Error ? error.message : undefined,
+      });
+    },
   });
 
   const [input, setInput] = useState("");
