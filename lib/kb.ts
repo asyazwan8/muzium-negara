@@ -1,5 +1,5 @@
 // Knowledge base for the Muzium Negara guide. Content is the visitor-facing
-// description of the permanent galleries, used to ground Ara's answers.
+// description of the permanent galleries, used to ground Kancil's answers.
 // Source: muziumnegara.gov.my (official site), as provided.
 
 export const MUZIUM_NEGARA_TITLE = "Muzium Negara";

@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { KancilAvatar } from "./kancil-avatar";
 
-// Render a little markdown in Ara's messages: links [label](url) and bare URLs
+// Render a little markdown in Kancil's messages: links [label](url) and bare URLs
 // become clickable, **bold** and *italic* render as such (italics are used for
 // Malay names in the guide).
 function renderRichText(text: string): React.ReactNode {
@@ -84,10 +84,10 @@ export function ChatBubble({
         ))}
       <div
         className={cn(
-          "max-w-[82%] rounded-2xl px-4 py-2.5 text-[15px] leading-relaxed whitespace-pre-wrap break-words",
+          "max-w-[82%] rounded-2xl px-4 py-2.5 text-[15px] leading-relaxed whitespace-pre-wrap break-words shadow-sm backdrop-blur-md",
           isKancil
-            ? "bg-card text-card-foreground rounded-tl-md shadow-sm"
-            : "bg-primary text-primary-foreground rounded-tr-md",
+            ? "bg-card/75 text-card-foreground ring-foreground/5 rounded-tl-md ring-1"
+            : "bg-primary/85 text-primary-foreground rounded-tr-md",
         )}
       >
         {typeof children === "string" ? renderRichText(children) : children}

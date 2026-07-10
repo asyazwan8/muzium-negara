@@ -1,5 +1,5 @@
 import { streamText, type UIMessage } from "ai";
-import { getAraModel } from "@/lib/ai/ollama";
+import { getModel } from "@/lib/ai/ollama";
 import { uiToModelMessages } from "@/lib/ai/messages";
 import { MUZIUM_SYSTEM_PROMPT } from "@/lib/persona";
 
@@ -15,7 +15,7 @@ export async function POST(req: Request) {
   if (!messages?.length) return new Response("Bad request", { status: 400 });
 
   const result = streamText({
-    model: getAraModel(),
+    model: getModel(),
     system: MUZIUM_SYSTEM_PROMPT,
     messages: uiToModelMessages(messages),
     temperature: 0.3,

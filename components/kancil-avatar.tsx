@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
-import { AraAvatar } from "@/components/ara-avatar";
+import { FaceAvatar } from "@/components/face-avatar";
 
 const SIZES = {
   xs: "size-6",
@@ -41,7 +41,7 @@ export function KancilAvatar({
   }, []);
 
   if (failed) {
-    return <AraAvatar size={size} expression="happy" className={className} />;
+    return <FaceAvatar size={size} expression="happy" className={className} />;
   }
 
   return (

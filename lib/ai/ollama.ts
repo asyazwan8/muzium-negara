@@ -2,7 +2,7 @@ import "server-only";
 import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
 
 /**
- * Ara's model: Kimi served via Ollama Cloud through the OpenAI-compatible API.
+ * The chat model: Kimi served via Ollama Cloud through the OpenAI-compatible API.
  * Server-only, the key must never reach the browser.
  *
  * Production: OLLAMA_BASE_URL=https://ollama.com/v1, OLLAMA_API_KEY=<cloud key>,
@@ -27,7 +27,7 @@ const ollama = createOpenAICompatible({
   ...(apiKey ? { apiKey } : {}),
 });
 
-export function getAraModel() {
+export function getModel() {
   const tag = process.env.OLLAMA_MODEL?.trim();
   if (!tag) {
     throw new Error(

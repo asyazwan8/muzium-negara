@@ -2,7 +2,7 @@
 
 A standalone chat guide to **Muzium Negara**, the National Museum in Kuala Lumpur. Chat with **Kancil**, the clever little mouse-deer of Malay folklore reimagined as your museum guide, who answers questions about the four permanent galleries (*Galeri A: Sejarah Awal*, *Galeri B: Kerajaan-Kerajaan Melayu*, *Galeri C: Era Kolonial*, *Galeri D: Malaysia Kini*) and the artifacts inside.
 
-This was extracted from the Ara Travel app into its own self-contained Next.js project, with a clean "modern museum" redesign (deep museum red on a neutral canvas).
+A self-contained Next.js project with a clean "modern museum" redesign (deep museum red on a neutral canvas): a landing page with a *pantun*, and a chat page set over Kancil's portrait.
 
 ## Meet Kancil
 
@@ -73,13 +73,14 @@ Just drop the two files into `public/` and redeploy. No code change needed.
 ```
 app/
   api/chat/route.ts   # grounded streaming chat endpoint
-  layout.tsx          # fonts, theme, toaster
-  page.tsx            # renders the chat
+  layout.tsx          # fixed app shell, fonts, theme, toaster
+  page.tsx            # landing page (logo, pantun, "Talk to Kancil")
+  chat/page.tsx       # chat page (Kancil photo backdrop)
 components/
   muzium-chat.tsx     # the chat UI (streaming + human-paced reveal)
   logo.tsx            # Muzium Negara logo (image, wordmark fallback)
   kancil-avatar.tsx   # Kancil's portrait avatar (image, SVG face fallback)
-  ara-avatar.tsx      # simple SVG face used as Kancil's fallback
+  face-avatar.tsx     # simple SVG face used as Kancil's fallback
   chat-bubble.tsx     # message bubble with light markdown rendering
   quick-reply-chips.tsx
 lib/

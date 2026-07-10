@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport, type UIMessage } from "ai";
-import { Send } from "lucide-react";
+import { ChevronLeft, Send } from "lucide-react";
 import { toast } from "sonner";
 import { ChatBubble } from "@/components/chat-bubble";
 import { KancilAvatar } from "@/components/kancil-avatar";
@@ -68,10 +69,13 @@ export function MuziumChat() {
       }),
     }),
     onFinish: ({ message }) => startReveal(message as UIMessage),
-    onError: () => toast.error("Ara had a little hiccup. Mind trying again?"),
+    onError: () =>
+      toast.error("Kancil had a little hiccup. Mind trying again?"),
   });
 
   const [input, setInput] = useState("");
+  const [bgFailed, setBgFailed] = useState(false);
+  const bgRef = useRef<HTMLImageElement>(null);
   const endRef = useRef<HTMLDivElement>(null);
   const streaming = status === "submitted" || status === "streaming";
   const revealMsg = revealId
@@ -96,6 +100,12 @@ export function MuziumChat() {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, status, revealCount]);
 
+  // A missing background image can 404 before hydration, so onError never fires.
+  useEffect(() => {
+    const img = bgRef.current;
+    if (img && img.complete && img.naturalWidth === 0) setBgFailed(true);
+  }, []);
+
   function send(text: string) {
     const trimmed = text.trim();
     if (!trimmed || busy) return;
@@ -104,27 +114,42 @@ export function MuziumChat() {
   }
 
   return (
-    <div className="flex flex-1 flex-col">
-      <header className="bg-background/95 sticky top-0 z-10 flex items-center justify-between border-b px-4 py-3 backdrop-blur">
-        <Logo />
-        <span className="bg-accent text-accent-foreground inline-flex items-center gap-1.5 rounded-full py-1 pr-2.5 pl-1.5 text-xs font-medium">
+    <div className="relative flex flex-1 flex-col overflow-hidden">
+      {/* Kancil photo backdrop, softened by a scrim so chat stays readable */}
+      <div aria-hidden className="absolute inset-0 -z-10">
+        {!bgFailed && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            ref={bgRef}
+            src="/kancil.png"
+            alt=""
+            onError={() => setBgFailed(true)}
+            className="h-full w-full object-cover object-center opacity-90"
+          />
+        )}
+        <div className="from-background/85 via-background/40 to-background/90 absolute inset-0 bg-gradient-to-b" />
+      </div>
+
+      <header className="bg-background/50 flex shrink-0 items-center justify-between border-b px-3 py-3 backdrop-blur-md">
+        <div className="flex items-center gap-1.5">
+          <Link
+            href="/"
+            aria-label="Back to home"
+            className="text-muted-foreground hover:text-foreground -ml-1 p-1"
+          >
+            <ChevronLeft className="size-5" aria-hidden />
+          </Link>
+          <Logo />
+        </div>
+        <span className="bg-accent/80 text-accent-foreground inline-flex items-center gap-1.5 rounded-full py-1 pr-2.5 pl-1.5 text-xs font-medium backdrop-blur">
           <KancilAvatar size="xs" />
           {CHARACTER_NAME}
         </span>
       </header>
 
-      <div className="flex-1 space-y-4 px-4 py-5">
+      <div className="flex-1 space-y-4 overflow-y-auto px-4 py-5">
         {isEmpty && (
           <div className="space-y-3">
-            <div className="flex flex-col items-center gap-1 pt-2 pb-1 text-center">
-              <KancilAvatar size="xl" contain />
-              <p className="font-heading text-foreground mt-1 text-base font-semibold">
-                {CHARACTER_NAME}
-              </p>
-              <p className="text-muted-foreground text-xs">
-                Sang Kancil, your {GUIDE_TITLE} guide
-              </p>
-            </div>
             <ChatBubble role="assistant">
               salam, welcome to {GUIDE_TITLE} 🙂 i&apos;m {CHARACTER_NAME}, the
               little mouse-deer. ask me anything about the four galleries and
@@ -136,7 +161,7 @@ export function MuziumChat() {
               disabled={busy}
               className="pl-9"
             />
-            <p className="text-muted-foreground/80 px-1 pt-2 text-[11px] leading-relaxed">
+            <p className="text-muted-foreground bg-background/40 mx-1 mt-2 rounded-lg px-2 py-1.5 text-[11px] leading-relaxed backdrop-blur">
               {CHARACTER_NAME} answers from {GUIDE_TITLE}&apos;s permanent-gallery
               guide. An independent companion, not affiliated with the official
               museum.
@@ -177,7 +202,7 @@ export function MuziumChat() {
         {showTyping && (
           <div className="flex items-center gap-2">
             <KancilAvatar size="sm" />
-            <span className="text-muted-foreground animate-pulse text-sm">
+            <span className="text-muted-foreground bg-background/50 animate-pulse rounded-full px-2.5 py-1 text-sm backdrop-blur">
               {CHARACTER_NAME} is typing..
             </span>
           </div>
@@ -186,7 +211,7 @@ export function MuziumChat() {
         <div ref={endRef} />
       </div>
 
-      <div className="bg-background/95 sticky bottom-0 shrink-0 border-t px-3 py-3 backdrop-blur">
+      <div className="bg-background/60 shrink-0 border-t px-3 py-3 backdrop-blur-md">
         <div className="flex items-end gap-2">
           <Textarea
             value={input}
@@ -203,7 +228,7 @@ export function MuziumChat() {
               busy ? `${CHARACTER_NAME} is typing…` : `Ask about ${GUIDE_TITLE}…`
             }
             aria-label="Ask the guide"
-            className="max-h-32 min-h-11 flex-1 resize-none rounded-2xl disabled:opacity-60"
+            className="bg-background/70 max-h-32 min-h-11 flex-1 resize-none rounded-2xl backdrop-blur disabled:opacity-60"
           />
           <Button
             type="button"

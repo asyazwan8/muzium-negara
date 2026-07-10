@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
 /**
- * Quick-reply suggestion chips shown after an Ara message to reduce typing friction.
+ * Quick-reply suggestion chips shown after a message to reduce typing friction.
  */
 export function QuickReplyChips({
   options,

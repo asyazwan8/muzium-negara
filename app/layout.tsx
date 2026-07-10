@@ -10,9 +10,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Muzium Negara Guide · Ara",
+  title: "Muzium Negara · Kancil",
   description:
-    "A modern chat guide to Muzium Negara, the National Museum in Kuala Lumpur. Ask Ara about the four permanent galleries and what's inside.",
+    "A modern chat guide to Muzium Negara, the National Museum in Kuala Lumpur. Ask Kancil, the clever mouse-deer, about the four permanent galleries and what's inside.",
   applicationName: "Muzium Negara Guide",
   appleWebApp: {
     capable: true,
@@ -35,10 +35,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} h-full antialiased`}>
-      <body className="bg-background text-foreground flex min-h-full flex-col">
+      <body className="bg-background text-foreground">
         {/* museum-red identity accent */}
-        <div className="bg-primary h-1 w-full shrink-0" aria-hidden />
-        <div className="bg-background mx-auto flex min-h-dvh w-full max-w-md flex-1 flex-col shadow-sm">
+        <div
+          className="bg-primary fixed inset-x-0 top-0 z-50 h-1"
+          aria-hidden
+        />
+        <div className="bg-background relative mx-auto flex h-dvh w-full max-w-md flex-col overflow-hidden shadow-sm">
           {children}
         </div>
         <Toaster position="top-center" />

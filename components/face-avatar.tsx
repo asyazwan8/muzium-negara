@@ -8,8 +8,8 @@ const SIZES = {
   xl: "size-20",
 } as const;
 
-/** Ara's moods, drawn from the design library's expression set. */
-export type AraExpression =
+/** Expression set for the simple fallback face. */
+export type FaceExpression =
   | "calm"
   | "happy"
   | "laughing"
@@ -25,9 +25,9 @@ export type AraExpression =
   | "content";
 
 /** Optional colour override (e.g. to colour-code categories), independent of expression. */
-export type AraTone = "mint" | "blush" | "sky" | "lilac" | "sand" | "orange";
+export type FaceTone = "mint" | "blush" | "sky" | "lilac" | "sand" | "orange";
 
-const TONE: Record<AraTone, string> = {
+const TONE: Record<FaceTone, string> = {
   mint: "fill-companion-mint",
   blush: "fill-companion-blush",
   sky: "fill-companion-sky",
@@ -37,7 +37,7 @@ const TONE: Record<AraTone, string> = {
 };
 
 /** Default background colour per expression. */
-const BG: Record<AraExpression, string> = {
+const BG: Record<FaceExpression, string> = {
   calm: "fill-companion-mint",
   happy: "fill-companion-blush",
   laughing: "fill-companion-blush",
@@ -63,7 +63,7 @@ type FaceConfig = {
   cheeks?: boolean;
 };
 
-const FACE: Record<AraExpression, FaceConfig> = {
+const FACE: Record<FaceExpression, FaceConfig> = {
   calm: { eyes: "closed", mouth: "smile", cheeks: true },
   happy: { eyes: "open", mouth: "smile", cheeks: true },
   laughing: { eyes: "closed", mouth: "open", cheeks: true },
@@ -221,10 +221,10 @@ function Accent({ kind }: { kind: "tear" | "sweat" }) {
 }
 
 /**
- * Ara's avatar, the expressive face from the design library, drawn as SVG so it
+ * A simple, friendly face drawn as SVG so it
  * stays crisp at any size and can shift mood with the conversation and per page.
  */
-export function AraAvatar({
+export function FaceAvatar({
   size = "md",
   expression = "calm",
   tone,
@@ -232,8 +232,8 @@ export function AraAvatar({
   className,
 }: {
   size?: keyof typeof SIZES;
-  expression?: AraExpression;
-  tone?: AraTone;
+  expression?: FaceExpression;
+  tone?: FaceTone;
   cheeks?: boolean;
   className?: string;
 }) {
@@ -244,7 +244,7 @@ export function AraAvatar({
     <svg
       viewBox="0 0 100 100"
       role="img"
-      aria-label="Ara"
+      aria-label="Kancil"
       className={cn("shrink-0 select-none", SIZES[size], className)}
     >
       <circle

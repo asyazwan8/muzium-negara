@@ -8,7 +8,7 @@
   Muzium Negara guide, "Modern Museum" design system.
   - Clean neutral canvas, deep museum red as the single strong accent, gold as a
     secondary highlight. Crisp modern sans (Inter) for headings and body.
-  - Companion pastels remain only for Ara's avatar expressions (her friendly face).
+  - Companion pastels remain only for the simple fallback face expressions.
 */
 
 @theme inline {
@@ -25,7 +25,7 @@
   --color-warning: var(--warning);
   --color-warning-foreground: var(--warning-foreground);
 
-  /* Companion pastels, Ara expressions, avatar rings, itinerary category chips */
+  /* Companion pastels, fallback face expressions, avatar rings */
   --color-companion-mint: var(--companion-mint);
   --color-companion-blush: var(--companion-blush);
   --color-companion-sky: var(--companion-sky);
@@ -99,7 +99,7 @@
   --warning: #c8a24b; /* gold, validation, never red */
   --warning-foreground: #1a1a1a;
 
-  /* Companion pastels (Ara's avatar expressions only) */
+  /* Companion pastels (simple fallback face expressions only) */
   --companion-mint: #bfe3ce;
   --companion-blush: #f7c5ce;
   --companion-sky: #bfd9f2;
