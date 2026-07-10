@@ -9,25 +9,21 @@ const SIZES = {
   sm: "size-7",
   md: "size-9",
   lg: "size-14",
-  xl: "size-24",
+  xl: "size-28",
 } as const;
 
 /**
- * Kancil's avatar: the mouse-deer character portrait.
+ * Kancil's profile picture: a face-focused crop of the mouse-deer character.
  *
- * Renders `public/kancil.png`. The source is a full-body render on white, so as
- * a small circle we bias the crop toward the top (head + tengkolok). If the file
- * is missing, it falls back to the friendly SVG face so the app never looks broken.
- *
- * Set `contain` for a larger, uncropped portrait (e.g. the welcome hero).
+ * Renders `public/kancil-face.png` (a square crop centred on the face). If the
+ * file is missing, it falls back to the friendly SVG face so the app never looks
+ * broken. Borderless with a soft shadow for a storybook feel.
  */
 export function KancilAvatar({
   size = "md",
-  contain = false,
   className,
 }: {
   size?: keyof typeof SIZES;
-  contain?: boolean;
   className?: string;
 }) {
   const [failed, setFailed] = useState(false);
@@ -48,12 +44,11 @@ export function KancilAvatar({
     // eslint-disable-next-line @next/next/no-img-element
     <img
       ref={ref}
-      src="/kancil.png"
+      src="/kancil-face.png"
       alt="Kancil, your Muzium Negara guide"
       onError={() => setFailed(true)}
       className={cn(
-        "bg-card ring-foreground/10 shrink-0 rounded-full ring-1 select-none",
-        contain ? "object-contain p-1" : "object-cover object-[50%_18%]",
+        "bg-card shrink-0 rounded-full object-cover object-center shadow-sm select-none",
         SIZES[size],
         className,
       )}

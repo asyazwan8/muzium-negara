@@ -2,7 +2,7 @@
 
 A standalone chat guide to **Muzium Negara**, the National Museum in Kuala Lumpur. Chat with **Kancil**, the clever little mouse-deer of Malay folklore reimagined as your museum guide, who answers questions about the four permanent galleries (*Galeri A: Sejarah Awal*, *Galeri B: Kerajaan-Kerajaan Melayu*, *Galeri C: Era Kolonial*, *Galeri D: Malaysia Kini*) and the artifacts inside.
 
-A self-contained Next.js project with a clean "modern museum" redesign (deep museum red on a neutral canvas): a landing page with a *pantun*, and a chat page set over Kancil's portrait.
+A self-contained Next.js project with a warm, children's-storybook design (gold and silver on a white page, rounded Baloo 2 display type): a landing page with a *pantun*, and a chat page set over Kancil's portrait. Available in **English and Bahasa Melayu** (toggle in the corner), which also switches the language Kancil replies in.
 
 ## Meet Kancil
 

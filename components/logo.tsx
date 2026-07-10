@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
-const LOGO_SRC = "/logo.png";
+const LOGO_SRC = "/logo-mark.png";
 
 // A small neoclassical museum-facade glyph (pediment + columns), in the brand
 // red. Used as the wordmark fallback if the official logo file is missing.
@@ -50,7 +50,10 @@ export function Logo({ className }: { className?: string }) {
         src={LOGO_SRC}
         alt="Muzium Negara"
         onError={() => setFailed(true)}
-        className={cn("h-10 w-auto select-none", className)}
+        className={cn(
+          "h-12 w-auto border-0 select-none dark:rounded-lg dark:bg-white dark:p-1.5",
+          className,
+        )}
       />
     );
   }

@@ -9,18 +9,11 @@ import { toast } from "sonner";
 import { ChatBubble } from "@/components/chat-bubble";
 import { KancilAvatar } from "@/components/kancil-avatar";
 import { Logo } from "@/components/logo";
+import { LanguageToggle } from "@/components/language-toggle";
 import { QuickReplyChips } from "@/components/quick-reply-chips";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { CHARACTER_NAME } from "@/lib/persona";
-
-const GUIDE_TITLE = "Muzium Negara";
-
-const STARTERS = [
-  "What's in Galeri A?",
-  "Tell me about Manusia Perak",
-  "What can I see here?",
-];
+import { STRINGS, useLang } from "@/lib/i18n";
 
 function textOf(m: UIMessage): string {
   return m.parts
@@ -37,6 +30,13 @@ function splitBubbles(text: string): string[] {
 }
 
 export function MuziumChat() {
+  const [lang, setLang] = useLang();
+  const t = STRINGS[lang];
+  const langRef = useRef(lang);
+  useEffect(() => {
+    langRef.current = lang;
+  }, [lang]);
+
   const revealTimersRef = useRef<number[]>([]);
   const messagesRef = useRef<UIMessage[]>([]);
   const [revealId, setRevealId] = useState<string | null>(null);
@@ -65,12 +65,11 @@ export function MuziumChat() {
     transport: new DefaultChatTransport({
       api: "/api/chat",
       prepareSendMessagesRequest: ({ messages }) => ({
-        body: { messages },
+        body: { messages, lang: langRef.current },
       }),
     }),
     onFinish: ({ message }) => startReveal(message as UIMessage),
-    onError: () =>
-      toast.error("Kancil had a little hiccup. Mind trying again?"),
+    onError: () => toast.error(STRINGS[langRef.current].errorHiccup),
   });
 
   const [input, setInput] = useState("");
@@ -134,37 +133,28 @@ export function MuziumChat() {
         <div className="flex items-center gap-1.5">
           <Link
             href="/"
-            aria-label="Back to home"
+            aria-label={t.backLabel}
             className="text-muted-foreground hover:text-foreground -ml-1 p-1"
           >
             <ChevronLeft className="size-5" aria-hidden />
           </Link>
           <Logo />
         </div>
-        <span className="bg-accent/80 text-accent-foreground inline-flex items-center gap-1.5 rounded-full py-1 pr-2.5 pl-1.5 text-xs font-medium backdrop-blur">
-          <KancilAvatar size="xs" />
-          {CHARACTER_NAME}
-        </span>
+        <LanguageToggle lang={lang} onChange={setLang} />
       </header>
 
       <div className="relative z-10 flex-1 space-y-4 overflow-y-auto px-4 py-5">
         {isEmpty && (
           <div className="space-y-3">
-            <ChatBubble role="assistant">
-              salam, welcome to {GUIDE_TITLE} 🙂 i&apos;m {CHARACTER_NAME}, the
-              little mouse-deer. ask me anything about the four galleries and
-              what&apos;s inside, and i&apos;ll tell you the story.
-            </ChatBubble>
+            <ChatBubble role="assistant">{t.welcome}</ChatBubble>
             <QuickReplyChips
-              options={STARTERS}
+              options={t.starters}
               onSelect={send}
               disabled={busy}
               className="pl-9"
             />
             <p className="text-muted-foreground bg-background/40 mx-1 mt-2 rounded-lg px-2 py-1.5 text-[11px] leading-relaxed backdrop-blur">
-              {CHARACTER_NAME} answers from {GUIDE_TITLE}&apos;s permanent-gallery
-              guide. An independent companion, not affiliated with the official
-              museum.
+              {t.chatDisclaimer}
             </p>
           </div>
         )}
@@ -203,7 +193,7 @@ export function MuziumChat() {
           <div className="flex items-center gap-2">
             <KancilAvatar size="sm" />
             <span className="text-muted-foreground bg-background/50 animate-pulse rounded-full px-2.5 py-1 text-sm backdrop-blur">
-              {CHARACTER_NAME} is typing..
+              {t.typing}
             </span>
           </div>
         )}
@@ -224,10 +214,8 @@ export function MuziumChat() {
             }}
             rows={1}
             disabled={busy}
-            placeholder={
-              busy ? `${CHARACTER_NAME} is typing…` : `Ask about ${GUIDE_TITLE}…`
-            }
-            aria-label="Ask the guide"
+            placeholder={busy ? t.typing : t.inputPlaceholder}
+            aria-label={t.inputPlaceholder}
             className="bg-background/70 max-h-32 min-h-11 flex-1 resize-none rounded-2xl backdrop-blur disabled:opacity-60"
           />
           <Button

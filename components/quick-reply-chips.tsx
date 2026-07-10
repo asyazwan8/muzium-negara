@@ -12,7 +12,7 @@ export function QuickReplyChips({
   disabled,
   className,
 }: {
-  options: string[];
+  options: readonly string[];
   onSelect: (value: string) => void;
   disabled?: boolean;
   className?: string;

@@ -1,12 +1,21 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Nunito, Baloo_2 } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+// Storybook pairing: Nunito for warm, rounded body text and Baloo 2 for the
+// friendly, chunky display and pantun headings.
+const nunito = Nunito({
+  variable: "--font-nunito",
   subsets: ["latin"],
   display: "swap",
+});
+
+const baloo = Baloo_2({
+  variable: "--font-baloo",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -22,7 +31,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#a32638",
+  themeColor: "#c8a54d",
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
@@ -34,11 +43,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`}>
+    <html
+      lang="en"
+      className={`${nunito.variable} ${baloo.variable} h-full antialiased`}
+    >
       <body className="bg-background text-foreground">
-        {/* museum-red identity accent */}
+        {/* gold-and-silver identity accent */}
         <div
-          className="bg-primary fixed inset-x-0 top-0 z-50 h-1"
+          className="fixed inset-x-0 top-0 z-50 h-1"
+          style={{
+            background:
+              "linear-gradient(90deg, var(--gold), var(--silver), var(--gold))",
+          }}
           aria-hidden
         />
         <div className="bg-background relative mx-auto flex h-dvh w-full max-w-md flex-col overflow-hidden shadow-sm">

@@ -15,9 +15,9 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-nunito);
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  --font-heading: var(--font-inter);
+  --font-heading: var(--font-baloo);
 
   /* Brand accents (kept distinct from shadcn's subtle --accent hover token) */
   --color-peach: var(--peach);
@@ -73,31 +73,33 @@
 }
 
 :root {
-  /* Modern museum core */
-  --background: #f5f4f2; /* warm neutral canvas */
-  --foreground: #1a1a1a; /* ink */
+  /* Storybook core: gold + silver on a white page */
+  --background: #ffffff; /* white canvas */
+  --foreground: #33302b; /* soft warm ink */
   --card: #ffffff;
-  --card-foreground: #1a1a1a;
+  --card-foreground: #33302b;
   --popover: #ffffff;
-  --popover-foreground: #1a1a1a;
-  --primary: #a32638; /* deep museum red */
-  --primary-foreground: #ffffff;
-  --secondary: #ecebe8; /* soft neutral surface */
-  --secondary-foreground: #1a1a1a;
-  --muted: #ecebe8;
-  --muted-foreground: #6f6b66;
-  --accent: #f6e9eb; /* light red tint for subtle hovers */
-  --accent-foreground: #a32638;
-  --destructive: #b3261e;
-  --border: #e3e0db;
-  --input: #e3e0db;
-  --ring: #a32638;
+  --popover-foreground: #33302b;
+  --primary: #c8a54d; /* gold */
+  --primary-foreground: #33302b; /* dark ink on gold */
+  --secondary: #eceae4; /* warm silver surface */
+  --secondary-foreground: #33302b;
+  --muted: #f1efe9;
+  --muted-foreground: #8a857b; /* warm silver-gray */
+  --accent: #f8f1dd; /* pale gold tint for hovers */
+  --accent-foreground: #8a6d24; /* deep gold */
+  --destructive: #c4615a;
+  --border: #e8e4d9; /* soft warm silver */
+  --input: #e5e0d4;
+  --ring: #c8a54d;
 
   /* Brand accents */
-  --peach: #c8a24b; /* museum gold, secondary highlight */
-  --peach-foreground: #1a1a1a;
-  --warning: #c8a24b; /* gold, validation, never red */
-  --warning-foreground: #1a1a1a;
+  --peach: #c8a54d; /* gold */
+  --peach-foreground: #33302b;
+  --gold: #c8a54d;
+  --silver: #c3c6cc;
+  --warning: #c8a54d;
+  --warning-foreground: #33302b;
 
   /* Companion pastels (simple fallback face expressions only) */
   --companion-mint: #bfe3ce;
@@ -107,55 +109,57 @@
   --companion-sand: #f0e2c8;
   --companion-orange: #e8895a;
 
-  --chart-1: #a32638;
-  --chart-2: #c8a24b;
-  --chart-3: #6f6b66;
-  --chart-4: #d98379;
-  --chart-5: #1a1a1a;
+  --chart-1: #c8a54d;
+  --chart-2: #c3c6cc;
+  --chart-3: #8a857b;
+  --chart-4: #e0cf94;
+  --chart-5: #33302b;
 
-  --radius: 0.75rem; /* modern = crisp; lg≈12px, xl≈15px */
+  --radius: 1rem; /* storybook = soft, rounded */
 
   --sidebar: #ffffff;
-  --sidebar-foreground: #1a1a1a;
-  --sidebar-primary: #a32638;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #ecebe8;
-  --sidebar-accent-foreground: #1a1a1a;
-  --sidebar-border: #e3e0db;
-  --sidebar-ring: #a32638;
+  --sidebar-foreground: #33302b;
+  --sidebar-primary: #c8a54d;
+  --sidebar-primary-foreground: #33302b;
+  --sidebar-accent: #eceae4;
+  --sidebar-accent-foreground: #33302b;
+  --sidebar-border: #e8e4d9;
+  --sidebar-ring: #c8a54d;
 }
 
 .dark {
-  --background: #171614;
-  --foreground: #f3f1ec;
-  --card: #201f1d;
-  --card-foreground: #f3f1ec;
-  --popover: #201f1d;
-  --popover-foreground: #f3f1ec;
-  --primary: #d24b5e;
-  --primary-foreground: #1a1010;
-  --secondary: #2a2926;
-  --secondary-foreground: #f3f1ec;
-  --muted: #2a2926;
-  --muted-foreground: #b0aca4;
-  --accent: #33211f;
-  --accent-foreground: #f3f1ec;
+  --background: #201d18;
+  --foreground: #f2ede2;
+  --card: #2a261f;
+  --card-foreground: #f2ede2;
+  --popover: #2a261f;
+  --popover-foreground: #f2ede2;
+  --primary: #d8b85f;
+  --primary-foreground: #201d18;
+  --secondary: #2f2b23;
+  --secondary-foreground: #f2ede2;
+  --muted: #2f2b23;
+  --muted-foreground: #b3ab9b;
+  --accent: #322a1c;
+  --accent-foreground: #e6cf94;
   --destructive: #e0685f;
   --border: #ffffff1a;
   --input: #ffffff26;
-  --ring: #d24b5e;
-  --peach: #d8b45f;
-  --peach-foreground: #171614;
-  --warning: #d8b45f;
-  --warning-foreground: #171614;
-  --sidebar: #201f1d;
-  --sidebar-foreground: #f3f1ec;
-  --sidebar-primary: #d24b5e;
-  --sidebar-primary-foreground: #1a1010;
-  --sidebar-accent: #2a2926;
-  --sidebar-accent-foreground: #f3f1ec;
+  --ring: #d8b85f;
+  --peach: #d8b85f;
+  --peach-foreground: #201d18;
+  --gold: #d8b85f;
+  --silver: #c3c6cc;
+  --warning: #d8b85f;
+  --warning-foreground: #201d18;
+  --sidebar: #2a261f;
+  --sidebar-foreground: #f2ede2;
+  --sidebar-primary: #d8b85f;
+  --sidebar-primary-foreground: #201d18;
+  --sidebar-accent: #2f2b23;
+  --sidebar-accent-foreground: #f2ede2;
   --sidebar-border: #ffffff1a;
-  --sidebar-ring: #d24b5e;
+  --sidebar-ring: #d8b85f;
 }
 
 @layer base {
